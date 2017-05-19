@@ -50,6 +50,8 @@ class NCELoss(nn.Module):
         true_per_batch = flat_labels.size()[0]
         print('Obtaining sampled values ...')
         if sampled_values is None:
+	    # Indices representing the data classes have to be sorted in the order of descending frequency
+	    # for the sampler to provide representative distractors and frequency counts
             sampled_values = sample_values(labels, self.opt.num_sampled, self.opt.unique,
                                            self.opt.remove_accidental_hits, self.sampling_array,
                                            self.class_probs)
